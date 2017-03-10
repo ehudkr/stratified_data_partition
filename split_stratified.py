@@ -26,9 +26,11 @@ def split_stratified(df, feature_by, test_frac=0.25, random_state=None, shuffle=
         test = test.append(test_sample)
         train = train.append(cur_df.index.drop(test_sample))
 
+    test = df.loc[test]
+    train = df.loc[train]
     if shuffle:
-        test = df.loc[test].sample(frac=1)  # shuffle rows due to the append
-        train = df.loc[train].sample(frac=1)
+        test = test.sample(frac=1)  # shuffle rows due to the append
+        train = train.sample(frac=1)
 
     if visualize:
         # visualize the same proportions:
